@@ -1,0 +1,89 @@
+# File produced by 
+
+newmtl stuka1__2
+  Ns 115.3
+  d 1.0
+  illum 2
+  Kd 0.9961 0.9961 0.9961
+  Ka 0 0 0
+  Ks 0.8627 0.8627 0.8627
+
+newmtl stuka1__2_01
+  Ns 94.98
+  d 1.0
+  illum 2
+  Kd 0.1961 0.1961 0.1961
+  Ka 0 0 0
+  Ks 1.0 1.0 1.0
+
+newmtl stuka1__2_02
+  Ns 115.3
+  d 1.0
+  illum 2
+  Kd 0.9961 0.9961 0.9961
+  Ka 0 0 0
+  Ks 0.8627 0.8627 0.8627
+
+newmtl stuka1__2_03
+  Ns 94.98
+  d 1.0
+  illum 2
+  Kd 0.1961 0.1961 0.1961
+  Ka 0 0 0
+  Ks 1.0 1.0 1.0
+
+newmtl stuka1__2_04
+  Ns 115.3
+  d 1.0
+  illum 2
+  Kd 0.6863 0.7451 0.7961
+  Ka 0 0 0
+  Ks 0.6863 0.7451 0.7961
+
+newmtl stuka1__2_05
+  Ns 128.0
+  d 0.45
+  illum 2
+  Kd 0.3922 0.3922 0.498
+  Ka 0 0 0
+  Ks 0.7843 0.7843 1.0
+
+newmtl stuka1__2_06
+  Ns 115.3
+  d 1.0
+  illum 2
+  Kd 0.9961 0.9961 0.9961
+  Ka 0 0 0
+  Ks 0.8627 0.8627 0.8627
+
+newmtl stuka1__2_07
+  Ns 54.34
+  d 1.0
+  illum 2
+  Kd 0.1961 0.1961 0.1961
+  Ka 0 0 0
+  Ks 1.0 1.0 1.0
+
+newmtl stuka1__2_08
+  Ns 115.3
+  d 1.0
+  illum 2
+  Kd 0 0 0
+  Ka 0 0 0
+  Ks 0 0 0
+
+newmtl stuka1__2_09
+  Ns 94.98
+  d 1.0
+  illum 2
+  Kd 0.1961 0.1961 0.1961
+  Ka 0 0 0
+  Ks 1.0 1.0 1.0
+
+newmtl stuka1__2_10
+  Ns 94.98
+  d 1.0
+  illum 2
+  Kd 0.1569 0.1569 0.1569
+  Ka 0 0 0
+  Ks 1.0 1.0 1.0
