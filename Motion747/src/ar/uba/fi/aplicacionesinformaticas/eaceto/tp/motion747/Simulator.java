@@ -4,12 +4,17 @@
  */
 package ar.uba.fi.aplicacionesinformaticas.eaceto.tp.motion747;
 
+import ar.uba.fi.aplicacionesinformaticas.eaceto.tp.motion747.model.Aircraft;
+import ar.uba.fi.aplicacionesinformaticas.eaceto.tp.motion747.model.PitchInstrument;
+import ar.uba.fi.aplicacionesinformaticas.eaceto.tp.motion747.model.BasicInstrument;
+import ar.uba.fi.aplicacionesinformaticas.eaceto.tp.motion747.model.RollInstrument;
 import com.leapmotion.leap.Config;
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Hand;
 import com.leapmotion.leap.Listener;
 import com.leapmotion.leap.Vector;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,18 +23,26 @@ import com.leapmotion.leap.Vector;
 public class Simulator extends Listener {
 
     private final float LEAP_RAD_TO_DEG = 57.295779513f; // Radians to Degrees constant
-    
     private Aircraft aircraft;
-
     private Controller controller;
+    private ArrayList<BasicInstrument> instruments;
+    private PitchInstrument pitchInstrument;
+    private RollInstrument rollInstrument;
     
     private Simulator() {
     }
 
     public Simulator(Aircraft aircraft) {
         this.aircraft = aircraft;
+        instruments = new ArrayList<BasicInstrument>();
+
+        pitchInstrument = new PitchInstrument();
+        rollInstrument = new RollInstrument();
         
-         controller = new Controller(this);
+        instruments.add(pitchInstrument);
+        instruments.add(rollInstrument);
+        
+        controller = new Controller(this);
     }
 
     @Override
@@ -44,35 +57,40 @@ public class Simulator extends Listener {
         System.out.println("LeapMotion Controller connected: " + cntrlr);
     }
 
+    public ArrayList<BasicInstrument> getInstruments() {
+        return instruments;
+    }
+
     @Override
     public void onFrame(Controller cntrlr) {
-        if(cntrlr.isConnected()) {
+        if (cntrlr.isConnected()) {
             Frame frame = cntrlr.frame(); //The latest frame
-            
+
             if (frame.hands().count() == 1) {
                 Hand hand = frame.hands().get(0);
-                
+
                 int fingersCount = hand.fingers().count();
-                
-                if (fingersCount < 3) {
+
+                if (fingersCount <= 1) {
                     System.out.println("Hand closed");
                     //aircraft.setPitch(0.0f);
                     //aircraft.setRoll(0.0f);
                     //aircraft.setYaw(0.0f);
-                }
-                else {
+                } else {
                     Vector normal = hand.palmNormal();
                     Vector direction = hand.direction();
-                    
+
                     float pitch = direction.pitch() * LEAP_RAD_TO_DEG;
                     float roll = normal.roll() * LEAP_RAD_TO_DEG;
                     float yaw = direction.yaw() * LEAP_RAD_TO_DEG;
-                    
-                    System.out.println("Frame: " +pitch+ " - " + roll + " - " + yaw);
-                    
+
+                    System.out.println("Frame: " + pitch + " - " + roll + " - " + yaw);
+
                     aircraft.setPitch(pitch);
                     aircraft.setRoll(roll);
-                    aircraft.setYaw(yaw);
+                    //aircraft.setYaw(yaw);
+                    
+                    pitchInstrument.setValue(pitch);
                 }
             }
         }

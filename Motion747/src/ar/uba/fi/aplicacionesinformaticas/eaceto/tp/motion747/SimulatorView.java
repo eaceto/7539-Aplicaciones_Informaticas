@@ -4,6 +4,7 @@
  */
 package ar.uba.fi.aplicacionesinformaticas.eaceto.tp.motion747;
 
+import ar.uba.fi.aplicacionesinformaticas.eaceto.tp.motion747.model.BasicInstrument;
 import com.owens.oobjloader.builder.Build;
 import com.owens.oobjloader.builder.Face;
 import com.owens.oobjloader.builder.FaceVertex;
@@ -28,20 +29,20 @@ import org.lwjgl.util.glu.GLU;
  * @author kimi
  */
 public class SimulatorView {
+
     public final String WINDOW_TITLE = "Flight Simulator - Ezequiel Aceto";
-    
-    /** Desired frame time */
+    /**
+     * Desired frame time
+     */
     private final int FRAMERATE = 60;
     private boolean finished;
     private boolean fullscreen = true;
-
     private Simulator simulator;
-    
+
     public SimulatorView(Simulator simulator) {
         this.simulator = simulator;
     }
-    
-    
+
     // iterate over face list from builder, and break it up into a set of face lists by material, i.e. each for each face list, all faces in that specific list use the same material
     private ArrayList<ArrayList<Face>> createFaceListsByMaterial(Build builder) {
         ArrayList<ArrayList<Face>> facesByTextureList = new ArrayList<ArrayList<Face>>();
@@ -183,7 +184,7 @@ public class SimulatorView {
         //System.err.println("Triangle list has " + triangleList.size() + " rendered triangles of which " + normalCount + " have normals for all vertices and " + texturedCount + " have texture coords for all vertices.");
         return triangleList;
     }
-    
+
     public void init() throws Exception {
         init(false);
     }
@@ -213,9 +214,9 @@ public class SimulatorView {
     }
 
     public void run() {
-        run(simulator.getAircraftWaveFrontFile(),"");
+        run(simulator.getAircraftWaveFrontFile(), "");
     }
-    
+
     /**
      * Runs the program (the "main loop")
      */
@@ -274,42 +275,45 @@ public class SimulatorView {
         //System.err.println("Finally ready to draw things.");
 
         /*
-        float anglex = 0;
-        float angley = 0;
-        float anglez = 0;
-        float anglexInc = .25f;
-        float angleyInc = .25f;
-        float anglezInc = .25f;
+         float anglex = 0;
+         float angley = 0;
+         float anglez = 0;
+         float anglexInc = .25f;
+         float angleyInc = .25f;
+         float anglezInc = .25f;
+         float translatex = 0;
+         float translatey = 0f;
+         float translatez = -200f;
+         float incrementx = 0;
+         float incrementy = 0;
+         float incrementz = 1f;
+         float zmax = -200f;
+         float zmin = -600f;
+         */
         float translatex = 0;
         float translatey = 0f;
-        float translatez = -200f;
+        float translatez = -250f;
         float incrementx = 0;
         float incrementy = 0;
         float incrementz = 1f;
         float zmax = -200f;
         float zmin = -600f;
-        */
-        float translatex = 0;
-        float translatey = 0f;
-        float translatez = -200f;
-        float incrementx = 0;
-        float incrementy = 0;
-        float incrementz = 1f;
-        float zmax = -200f;
-        float zmin = -600f;        
 
         while (!finished) {
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
             GL11.glLoadIdentity();
+
+
+
 
             // add some arbitrary rotation and translation of the viewpoint just to make things less boring
             //anglex = (anglex + anglexInc) % 360;
             //angley = (angley + angleyInc) % 360;
             //anglez = (anglez + anglezInc) % 360;
             float anglex = simulator.getAircraftPitch();
-            float angley = - simulator.getAircraftYaw();
+            float angley = -simulator.getAircraftYaw();
             float anglez = simulator.getAircraftRoll();
-            
+
             if (anglez > 360) {
                 anglez = 0;
             }
@@ -319,19 +323,24 @@ public class SimulatorView {
             if (translatez <= zmin || translatez >= zmax) {
                 incrementz = -incrementz;
             }
-            
+
             if (translatez <= -600f) {
                 incrementz = 1f;
                 translatez = -200f;
             }
-            
+
 //            //System.err.println("positioning at  " + translatex + ", " + translatey + ", " + translatez + " rotation " + anglex + ", " + angley + ", " + anglez);
+
+
             GL11.glTranslated(0, 0, translatez);
             GL11.glTranslated(0, translatey, 0);
             GL11.glTranslated(translatex, 0, 0);
-            GL11.glRotatef(anglez, 0.0f, 0.0f, 1.0f);
-            GL11.glRotatef(angley, 0.0f, 1.0f, 0.0f);
-            GL11.glRotatef(anglex, 1.0f, 0.0f, 0.0f);
+            /*
+             GL11.glRotatef(anglez, 0.0f, 0.0f, 1.0f);
+             GL11.glRotatef(angley, 0.0f, 1.0f, 0.0f);
+             GL11.glRotatef(anglex, 1.0f, 0.0f, 0.0f);
+             */
+
 
             // Always call Window.update(), all the time - it does some behind the
             // scenes work, and also displays the rendered output
@@ -343,8 +352,29 @@ public class SimulatorView {
             } // The window is in the foreground, so render!
             else if (Display.isActive()) {
                 logic();
+
                 GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_STENCIL_BUFFER_BIT);
+
+
+                float xinstrument = -160;
+                float yinstrument = 60;
+                float winstrument = 30;
+                float hinstrument = 30;
+
+                for (BasicInstrument instrument : simulator.getInstruments()) {
+                    instrument.drawInstrument(xinstrument, yinstrument,
+                            xinstrument + winstrument, yinstrument + hinstrument);
+
+                    xinstrument += winstrument + 5;
+                }
+
+                GL11.glRotatef(anglez, 0.0f, 0.0f, 1.0f);
+                GL11.glRotatef(angley, 0.0f, 1.0f, 0.0f);
+                GL11.glRotatef(anglex, 1.0f, 0.0f, 0.0f);
+
                 scene.render();
+
+
                 Display.sync(FRAMERATE);
             } // The window is not in the foreground, so we can allow other stuff to run and infrequently update
             else {
@@ -381,6 +411,4 @@ public class SimulatorView {
         }
 
     }
-    
-
 }
