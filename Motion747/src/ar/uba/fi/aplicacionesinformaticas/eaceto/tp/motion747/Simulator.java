@@ -39,8 +39,8 @@ public class Simulator extends Listener {
         pitchInstrument = new PitchInstrument();
         rollInstrument = new RollInstrument();
         
-        instruments.add(pitchInstrument);
-        instruments.add(rollInstrument);
+        //instruments.add(pitchInstrument);
+        //instruments.add(rollInstrument);
         
         controller = new Controller(this);
     }
@@ -84,13 +84,18 @@ public class Simulator extends Listener {
                     float roll = normal.roll() * LEAP_RAD_TO_DEG;
                     float yaw = direction.yaw() * LEAP_RAD_TO_DEG;
 
-                    System.out.println("Frame: " + pitch + " - " + roll + " - " + yaw);
-
+                    
                     aircraft.setPitch(pitch);
                     aircraft.setRoll(roll);
-                    //aircraft.setYaw(yaw);
+                    aircraft.setYaw(yaw);
                     
                     pitchInstrument.setValue(pitch);
+                    
+                    //aircraft.setYaw(yaw);
+                    
+                    
+                    System.out.println("Frame: " + pitch + " - " + roll + " - " + yaw);
+
                 }
             }
         }
