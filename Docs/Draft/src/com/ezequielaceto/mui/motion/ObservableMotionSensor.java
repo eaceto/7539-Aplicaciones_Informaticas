@@ -14,5 +14,5 @@ public interface ObservableMotionSensor {
     public void notifyObservers();
      
     //method to get updates from subject
-    public Object getUpdate(MotionObserver obj);         
+    public Object getMovement(MotionObserver obj);         
 }

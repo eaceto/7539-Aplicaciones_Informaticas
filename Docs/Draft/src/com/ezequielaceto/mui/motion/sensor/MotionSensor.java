@@ -68,14 +68,29 @@ public abstract class MotionSensor extends Sensor implements ObservableMotionSen
             this.stateChanged=false;
         }
         for (MotionObserver obj : observersLocal) {
-            obj.update();
+            obj.update(this);
         }
     }
  
     @Override
-    public MotionState getUpdate(MotionObserver obj) {
+    public MotionState getMovement(MotionObserver obj) {
         return motionState;
     }
+    
+    
+    
     /// End on Motion Observer Methods
+    
+    @Override
+    protected void onNewDataAvailable(Object newData) {
+        motionState.data = newData;
+        
+        for (Focuseable f : focusSensors) {
+            if (f.hasFocus()) {
+                notifyObservers();
+                break;
+            }
+        }        
+    }
     
 }
