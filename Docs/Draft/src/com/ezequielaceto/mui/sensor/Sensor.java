@@ -59,6 +59,7 @@ public abstract class Sensor {
             @Override
             public void run() {
                 Object newData = getDataFromSensor();
+                
                 if (isNewData(newData)) {
                     onNewDataAvailable(newData);
                 }
