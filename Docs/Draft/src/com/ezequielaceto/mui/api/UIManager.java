@@ -6,11 +6,11 @@
 
 package com.ezequielaceto.mui.api;
 
-import com.ezequielaceto.mui.LeapMotion.LeapMotionSensor;
+import com.ezequielaceto.mui.sensor.LeapMotion.LeapMotionSensor;
 import com.ezequielaceto.mui.motion.MotionObserver;
 import com.ezequielaceto.mui.motion.ObservableMotionSensor;
 import com.ezequielaceto.mui.motion.OnMotionDetectedListener;
-import com.ezequielaceto.mui.motion.sensor.MotionSensor;
+import com.ezequielaceto.mui.sensor.motion.MotionSensor;
 import java.util.HashMap;
 import java.util.List;
 

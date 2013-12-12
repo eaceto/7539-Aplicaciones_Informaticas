@@ -6,12 +6,12 @@
 
 package com.ezequielaceto.test.mui;
 
-import com.ezequielaceto.mui.Kinect.KinectMotionSensor;
-import com.ezequielaceto.mui.LeapMotion.LeapMotionSensor;
-import com.ezequielaceto.mui.TheEyeTribe.TheEyeTribeFocusSensor;
+import com.ezequielaceto.mui.sensor.Kinect.KinectMotionSensor;
+import com.ezequielaceto.mui.sensor.LeapMotion.LeapMotionSensor;
+import com.ezequielaceto.mui.sensor.TheEyeTribe.TheEyeTribeFocusSensor;
 import com.ezequielaceto.mui.api.UIManager;
 import com.ezequielaceto.mui.motion.OnMotionDetectedListener;
-import com.ezequielaceto.mui.motion.sensor.MotionSensor;
+import com.ezequielaceto.mui.sensor.motion.MotionSensor;
 import com.ezequielaceto.mui.sensor.Sensor.SensorConnectionException;
 import org.junit.Test;
 import static org.junit.Assert.*;

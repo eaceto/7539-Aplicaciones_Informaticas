@@ -6,7 +6,7 @@
 
 package com.ezequielaceto.mui.motion;
 
-import com.ezequielaceto.mui.motion.sensor.MotionSensor;
+import com.ezequielaceto.mui.sensor.motion.MotionSensor;
 
 /**
  *
