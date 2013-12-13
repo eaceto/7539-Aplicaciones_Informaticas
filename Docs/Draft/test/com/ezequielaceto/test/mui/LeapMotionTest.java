@@ -42,8 +42,7 @@ public class LeapMotionTest {
 
             // creates a Leap Motion controller
             // by default Leap Mption is its own Focus sensor
-            // close hand means focus OFF - open hand means focus ON
-            
+            // close hand means focus OFF - open hand means focus ON            
             LeapMotionSensor leapMotion = new LeapMotionSensor();            
             leapMotion.connect();                        
             ui.addMotionSensor(leapMotion);

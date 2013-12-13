@@ -27,7 +27,10 @@ public class UIManager implements MotionObserver {
         motionSensors = new HashMap<>();
     }
 
-    
+    /**
+     * 
+     * @param ms a connected sensor
+     */
     public void addMotionSensor(MotionSensor ms) {
         if (!motionSensors.containsKey(ms.getIdentifier())) {
             motionSensors.put(ms.getIdentifier(), ms);
@@ -36,6 +39,10 @@ public class UIManager implements MotionObserver {
         }
     }
 
+    /**
+     * Removes a sensor from the system
+     * @param ms a sensor that was added
+     */
     public void removeMotionSensor(MotionSensor ms) {
         if (motionSensors.containsKey(ms.getIdentifier())) {
             ms.unregister(this);
