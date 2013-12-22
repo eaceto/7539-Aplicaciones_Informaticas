@@ -19,7 +19,7 @@ public class Aircraft {
     }
     
     public static Aircraft buildBoing747() {
-        String wfile = "/Users/kimi/FIUBA/7539/7539-Aplicaciones_Informaticas/3DModels/Boeing747/Boeing747.obj";
+        String wfile = "/Users/kimi/FIUBA/Materias/7539/7539-Aplicaciones_Informaticas/3DModels/Boeing747/Boeing747.obj";
         
         Aircraft a = new Aircraft(wfile);
         

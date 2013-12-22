@@ -26,9 +26,9 @@ public class ObjectController extends Listener {
     
     boolean calibrate;
     int numberOfSamples = MAX_SAMPLES;
-    float averageX;
-    float averageY;
-    float averageZ;
+    float averageX = 0;
+    float averageY = 0;
+    float averageZ = 0;
     
     
     public ObjectController(AccelerableObject object) {
@@ -77,15 +77,15 @@ public class ObjectController extends Listener {
                     Vector position = hand.palmPosition();
 
                     
-                    // XZ es el plano de movimiento horizontal
+                    // XY es el plano de movimiento horizontal
                     // Y es la altura
                     
                     // Transformamos a la regla de la mano derecha con XY en el plano
                     
                     
-                    float _x = -1* position.getX();
-                    float _y = position.getZ();
+                    float _x = position.getX();
                     float _z = position.getY();
+                    float _y = -1.0f * position.getZ();
                     
                     if (calibrate) {
                         
@@ -100,8 +100,10 @@ public class ObjectController extends Listener {
                             averageY /= 10;
                             averageZ /= 10;
                             
-                            System.out.println("CENTER");
-                            System.out.println(averageX + " " + averageY +  " " + averageZ);
+                            //System.out.println("CENTER");
+                            //System.out.println(averageX + " " + averageY +  " " + averageZ);
+                            
+                            System.out.println("Calibrated");
                             
                             calibrate = false;
                         }
@@ -114,12 +116,29 @@ public class ObjectController extends Listener {
                     // F Position: (4.5742116;177.17041;-90.749954)
                     // B Position: (-15.032832;149.04678;185.4192)
                     
-                    //System.out.println("Delta: ("+deltaX+";"+deltaY +";" +deltaZ + ")");
+                    //System.out.println("Delta: ("+deltaX+";"+deltaY +";" +deltaZ + ")");                   
                     
                     object.setPosition(_x - averageX,_y - averageY,_z - averageZ);
                     //object.setPosition(_x,_y,_z);
+                                        
+                    //System.out.println(object.getPosition());
                     
-                    System.out.println(object.getPosition());
+                    //System.out.println("Position in Polar coordinates: " + object.getPositionInPolarCoordinates());
+                    
+                    String dir = object.getDirection();
+                    
+                    if (object.getPositionR() < 50) {
+                        System.out.println("STOP");
+                    }
+                    else if (object.getPositionR() < 100) {
+                        System.out.println("Speed: 1 - Direction: "+ dir);
+                    }
+                    else if (object.getPositionR() < 150) {                    
+                        System.out.println("Speed: 2 - Direction: "+ dir);
+                    }
+                    else {
+                        System.out.println("Speed: 3 - Direction: "+ dir);
+                    }
                 }
             }
         }
